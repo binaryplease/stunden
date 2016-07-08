@@ -1,0 +1,41 @@
+#!/home/kapo/.rvm/rubies/jruby-1.7.19/bin/ruby -w
+# encoding: UTF-8
+require 'csv'
+
+t = Time.now
+t_unix = t.to_i
+
+# Hier den Stundenlohn angeben, um angezeigt zu bekommen, wie viele Knete der Arbeitstag gebracht hat ;-)
+stundenlohn = 16
+
+# Inputs
+
+puts "Wie lang warst du heute da? Arbeiten inkl. Pause (std) "
+std = gets.chomp
+
+puts "Wie lang war deine Pause? (min) "
+pause = gets.chomp
+pause = "0" if pause.empty?
+
+puts "Was hast du heute gemacht? "
+betreff = gets.chomp
+
+# Berechnungen
+
+t_arbeit = (std.to_f*60*60) - (pause.to_f*60)
+t_arbeit = t_arbeit/60/60
+
+puts "Du hast heute #{t_arbeit} Std gearbeitet! Das macht einen Bruttobetrag von #{(stundenlohn*t_arbeit)}€"
+gets.chomp
+start = "#{Time.at(t_unix - (std.to_f*60*60)).hour.to_s.rjust(2, "0")}:#{Time.at(t_unix - (std.to_f*60*60)).min.to_s.rjust(2, "0")}"
+ende = "#{t.hour.to_s.rjust(2, "0")}:#{t.min.to_s.rjust(2, "0")}"
+datum = "#{t.day.to_s.rjust(2, "0")}.#{t.month.to_s.rjust(2, "0")}.#{t.year}"
+
+# in CSV schreiben
+
+filepath = '/home/kapo/committance/Dokumente/Stundennachweise/stunden_gesamt.csv'
+CSV.open(filepath, 'a') do |csv|
+  csv << [datum, '',start, ende, pause, t_arbeit, betreff]
+end
+
+puts "Deine Stunden wurden eingetragen! Schönen Tag noch mein Hübscher!"
