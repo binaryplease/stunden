@@ -26,7 +26,7 @@ t_arbeit = (std.to_f*60*60) - (pause.to_f*60)
 t_arbeit = t_arbeit/60/60
 
 puts "Du hast heute #{t_arbeit} Std gearbeitet! Das macht einen Bruttobetrag von #{(stundenlohn*t_arbeit)}€"
-gets.chomp
+
 start = "#{Time.at(t_unix - (std.to_f*60*60)).hour.to_s.rjust(2, "0")}:#{Time.at(t_unix - (std.to_f*60*60)).min.to_s.rjust(2, "0")}"
 ende = "#{t.hour.to_s.rjust(2, "0")}:#{t.min.to_s.rjust(2, "0")}"
 datum = "#{t.day.to_s.rjust(2, "0")}.#{t.month.to_s.rjust(2, "0")}.#{t.year}"
