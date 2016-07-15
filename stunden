@@ -1,38 +1,32 @@
-#!/home/kapo/.rvm/rubies/jruby-1.7.19/bin/ruby -w
+#!/usr/bin/ruby -w
 # encoding: UTF-8
-require 'csv'
 
+
+require 'csv'
 
 class Stundenrechner
 	def initialize(*args)
-		@filepath = '/home/kapo/committance/Dokumente/Stundennachweise/stunden_gesamt.csv'
+		@filepath = '~/committance/Dokumente/Stundennachweise/stunden_gesamt.csv'
 		# Hier den Stundenlohn angeben, um angezeigt zu bekommen, wie viele Knete der Arbeitstag gebracht hat ;-)
 		@stundenlohn = 16
 
 	end
-
-
 
 	def mark_time
 
 		t = Time.now
 		t_unix = t.to_i
 
-
 		# Inputs
-
 		puts "Wie lang warst du heute da? Arbeiten inkl. Pause (std) "
 		std = gets.chomp
-
 		puts "Wie lang war deine Pause? (min) "
 		pause = gets.chomp
 		pause = "0" if pause.empty?
-
 		puts "Was hast du heute gemacht? "
 		betreff = gets.chomp
 
 		# Berechnungen
-
 		t_arbeit = (std.to_f*60*60) - (pause.to_f*60)
 		t_arbeit = t_arbeit/60/60
 
@@ -51,7 +45,7 @@ class Stundenrechner
 		puts "Deine Stunden wurden eingetragen! Schönen Tag noch mein Hübscher!"
 
 	end
-end	
+end
 
 
 rechner = Stundenrechner.new
